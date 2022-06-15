@@ -3,7 +3,7 @@ let minutesScreen = document.querySelector('.minutes')
 let startButton = document.querySelector('.start')
 let stopButton = document.querySelector('.stop')
 let resetButton = document.querySelector('.reset')
-
+let timer
 let seconds = 0
 let minutes = 0
 function secondsTimer(){
@@ -22,8 +22,14 @@ function secondsTimer(){
     if (minutes>9){
         minutesScreen.textContent =  minutes +':'
     }
+    if (minutes === 60){
+        clearInterval(timer)
+        timer = null
+        minutesScreen.textContent = minutes+':'
+        secondsScreen.textContent = '00'
+    }
 }
-let timer
+
 function start(){
     if(!timer){
 timer = setInterval(secondsTimer, 1000)
@@ -49,3 +55,4 @@ function stoping(){
     startButton.addEventListener('click', start)
 }
 stopButton.addEventListener('click', stoping)
+
